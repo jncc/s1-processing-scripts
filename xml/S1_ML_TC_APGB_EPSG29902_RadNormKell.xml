@@ -1,0 +1,132 @@
+<!---
+Software: Snap 5.0 
+Description: generation of Radiometric normalised TN(CORwithT0) Gamma0 IW1 VV (Kellndorfer approach with projected SR local incidence angle)
+Used Operators: Multilooking, Terrain Correction, BandMaths (for radiometric normalisation)
+--> 
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>$input1</file>
+    </parameters>
+  </node>
+  <node id="Multilook">
+    <operator>Multilook</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands/>
+      <nRgLooks>$input2</nRgLooks>
+      <nAzLooks>$input3</nAzLooks>
+      <outputIntensity>true</outputIntensity>
+      <grSquarePixel>false</grSquarePixel>
+    </parameters>
+  </node>
+  <node id="Terrain-Correction">
+    <operator>Terrain-Correction</operator>
+    <sources>
+      <sourceProduct refid="Multilook"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <sourceBands>$input4</sourceBands>
+      <demName>External DEM</demName>
+      <externalDEMFile>$input5</externalDEMFile>
+      <externalDEMNoDataValue>-32768</externalDEMNoDataValue>
+      <externalDEMApplyEGM>false</externalDEMApplyEGM>
+      <demResamplingMethod>$input6</demResamplingMethod>
+      <imgResamplingMethod>$input7</imgResamplingMethod>
+      <pixelSpacingInMeter>$input8</pixelSpacingInMeter>
+      <pixelSpacingInDegree>$input9</pixelSpacingInDegree>
+      <mapProjection>PROJCS[&quot;TM65 / Irish Grid&quot;, 
+  GEOGCS[&quot;TM65&quot;, 
+    DATUM[&quot;TM65&quot;, 
+      SPHEROID[&quot;Airy Modified 1849&quot;, 6377340.189, 299.3249646, AUTHORITY[&quot;EPSG&quot;,&quot;7002&quot;]], 
+      TOWGS84[482.5, -130.6, 564.6, -1.042, -0.214, -0.631, 8.15], 
+      AUTHORITY[&quot;EPSG&quot;,&quot;6299&quot;]], 
+    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], 
+    UNIT[&quot;degree&quot;, 0.017453292519943295], 
+    AXIS[&quot;Geodetic longitude&quot;, EAST], 
+    AXIS[&quot;Geodetic latitude&quot;, NORTH], 
+    AUTHORITY[&quot;EPSG&quot;,&quot;4299&quot;]], 
+  PROJECTION[&quot;Transverse_Mercator&quot;, AUTHORITY[&quot;EPSG&quot;,&quot;9807&quot;]], 
+  PARAMETER[&quot;central_meridian&quot;, -8.0], 
+  PARAMETER[&quot;latitude_of_origin&quot;, 53.5], 
+  PARAMETER[&quot;scale_factor&quot;, 1.000035], 
+  PARAMETER[&quot;false_easting&quot;, 200000.0], 
+  PARAMETER[&quot;false_northing&quot;, 250000.0], 
+  UNIT[&quot;m&quot;, 1.0], 
+  AXIS[&quot;Easting&quot;, EAST], 
+  AXIS[&quot;Northing&quot;, NORTH], 
+  AUTHORITY[&quot;EPSG&quot;,&quot;29902&quot;]]</mapProjection>
+      <alignToStandardGrid>false</alignToStandardGrid>
+      <standardGridOriginX>0.0</standardGridOriginX>
+      <standardGridOriginY>0.0</standardGridOriginY>
+      <nodataValueAtSea>false</nodataValueAtSea>
+      <saveDEM>false</saveDEM>
+      <saveLatLon>false</saveLatLon>
+      <saveIncidenceAngleFromEllipsoid>false</saveIncidenceAngleFromEllipsoid>
+      <saveLocalIncidenceAngle>false</saveLocalIncidenceAngle>
+      <saveProjectedLocalIncidenceAngle>true</saveProjectedLocalIncidenceAngle>
+      <saveSelectedSourceBand>true</saveSelectedSourceBand>
+      <outputComplex>false</outputComplex>
+      <applyRadiometricNormalization>false</applyRadiometricNormalization>
+      <saveSigmaNought>false</saveSigmaNought>
+      <saveGammaNought>false</saveGammaNought>
+      <saveBetaNought>false</saveBetaNought>
+      <incidenceAngleForSigma0>Use projected local incidence angle from DEM</incidenceAngleForSigma0>
+      <incidenceAngleForGamma0>Use projected local incidence angle from DEM</incidenceAngleForGamma0>
+      <auxFile>Latest Auxiliary File</auxFile>
+      <externalAuxFile/>
+    </parameters>
+  </node>
+  <node id="BandMaths">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Terrain-Correction"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>$input10</name>
+          <type>float32</type>
+          <expression>$input11</expression>
+          <description/>
+          <unit>Intensity</unit>
+          <noDataValue>NaN</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="BandMaths"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>$target1</file>
+      <formatName>$input12</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+      <displayPosition x="33.0" y="103.0"/>
+    </node>
+    <node id="Multilook">
+      <displayPosition x="127.0" y="104.0"/>
+    </node>
+    <node id="Terrain-Correction">
+      <displayPosition x="229.0" y="104.0"/>
+    </node>
+    <node id="BandMaths">
+      <displayPosition x="251.0" y="180.0"/>
+    </node>
+    <node id="Write">
+      <displayPosition x="386.0" y="180.0"/>
+    </node>
+  </applicationData>
+</graph>

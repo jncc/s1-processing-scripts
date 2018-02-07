@@ -1,0 +1,51 @@
+<graph id="Graph">
+  <version>1.0</version>
+  <node id="Read">
+    <operator>Read</operator>
+    <sources/>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>$input1</file>
+    </parameters>
+  </node>
+  <node id="BandMaths">
+    <operator>BandMaths</operator>
+    <sources>
+      <sourceProduct refid="Read"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <targetBands>
+        <targetBand>
+          <name>$input2</name>
+          <type>float32</type>
+          <expression>$input3</expression>
+          <description/>
+          <unit>$input4</unit>
+          <noDataValue>$input5</noDataValue>
+        </targetBand>
+      </targetBands>
+      <variables/>
+    </parameters>
+  </node>
+  <node id="Write">
+    <operator>Write</operator>
+    <sources>
+      <sourceProduct refid="BandMaths"/>
+    </sources>
+    <parameters class="com.bc.ceres.binding.dom.XppDomElement">
+      <file>$target1</file>
+      <formatName>$input6</formatName>
+    </parameters>
+  </node>
+  <applicationData id="Presentation">
+    <Description/>
+    <node id="Read">
+            <displayPosition x="64.0" y="129.0"/>
+    </node>
+    <node id="BandMaths">
+      <displayPosition x="234.0" y="131.0"/>
+    </node>
+    <node id="Write">
+            <displayPosition x="468.0" y="131.0"/>
+    </node>
+  </applicationData>
+</graph>

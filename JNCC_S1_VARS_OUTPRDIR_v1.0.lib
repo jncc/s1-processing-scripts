@@ -1,0 +1,131 @@
+#!/bin/bash 
+
+### v1.0
+
+S1PROD_VARS() 
+{
+  ## S1PROD_VARS_OUTPRDIR "$1" "$2" "$2"
+  ## S1PROD_VARS_OUTPRDIR "Suffix" "${SLICE_1_ZIP}" "${MAIN_OUTDIR}"
+  ## $1 possible values: SLICE_1; SLICE_2; SLICE_3 
+  ## 
+  ## This function generates:
+  ## 1) A set of variables from the name of the S1.zip
+  ## 2) A logfile within the product output directory
+  #######################################
+   
+  PROD_ZIP=$2 ## S1.zip
+  OUTPRDIR=$3 ## main output directory 
+  #### =====================
+  if [ "$1" = "SLICE_1" ]
+  then 
+	export SLICE_1_MISSION=$(echo ${PROD_ZIP} | cut -c 1-3) ## S1A, S1B
+	export SLICE_1_PROD_TYPE=$(echo ${PROD_ZIP} | cut -c 5-16) ## IW_SLC__1SDV
+	export SLICE_1_YMD=$(echo ${PROD_ZIP} | cut -c 18-25) # fomat of the string YYYYMMDD
+	export SLICE_1_YMD_dateformat=$(date '+%Y%m%d' -d "${SLICE_1_YMD}") # FORMAT the acquisition date text in a real date 
+	export SLICE_1_DMY=$(date '+%d%b%Y' -d "${SLICE_1_YMD_dateformat}")  # put the acquisition date into a format to be ingested into the S1TBX xml chain 
+	export SLICE_1_START_HHMMSS=$(echo ${PROD_ZIP} | cut -c 27-32) # fomat of the string HHMMSS
+	export SLICE_1_END_HHMMSS=$(echo ${PROD_ZIP} | cut -c 43-48) # fomat of the string HHMMSS
+	export SLICE_1_ROOTNAME="${SLICE_1_MISSION}_${SLICE_1_DMY}_${SLICE_1_START_HHMMSS}_${SLICE_1_END_HHMMSS}"
+	#### for debugging
+	# echo "SLICE_1 image .zip = ${2}"
+	# echo "SLICE_1 image - Satellite Mission = ${SLICE_1_MISSION}" 
+	# echo "SLICE_1 product type = ${SLICE_1_PROD_TYPE}" 
+	# echo "SLICE_1 date YYYYMMDD: ${SLICE_1_YMD}" 
+	# echo "SLICE_1 Acquisition date DDMMYYYY: ${SLICE_1_DMY}"
+	# echo "SLICE_1 Start Time HHMMSS: ${SLICE_1_START_HHMMSS}"
+	# echo "SLICE_1 End Time HHMMSS: ${SLICE_1_END_HHMMSS}"
+	# echo "SLICE_1 Root name = ${SLICE_1_ROOTNAME}"
+    #### ===================================================
+    #### Creation logfile image within the PRODUCT OUTPUT folder
+	export SLICE_1_LOG="${3}/log_${SLICE_1_ROOTNAME}_processed_$(date +"%F_%H%M%S").txt"
+    #### Logging into the logfile
+    echo "=========================================" >> ${SLICE_1_LOG}
+	echo "Time : $(date +"%F_%H%M%S")" >> ${SLICE_1_LOG}
+    echo "S1 Image .zip = ${SLICE_1_ZIP}" >> ${SLICE_1_LOG}
+	echo "Satellite Mission = ${SLICE_1_MISSION}" >> ${SLICE_1_LOG}
+	echo "Product type = ${SLICE_1_PROD_TYPE}" >> ${SLICE_1_LOG}
+	echo "Date YYYYMMDD: ${SLICE_1_YMD}" >> ${SLICE_1_LOG}
+	echo "Acquisition date DDMMYYYY: ${SLICE_1_DMY}" >> ${SLICE_1_LOG}
+	echo "Start Time HHMMSS: ${SLICE_1_START_HHMMSS}" >> ${SLICE_1_LOG}
+	echo "End Time HHMMSS: ${SLICE_1_END_HHMMSS}" >> ${SLICE_1_LOG}
+	echo "Product Root name = ${SLICE_1_ROOTNAME}" >> ${SLICE_1_LOG}
+	echo "=========================================" >> ${SLICE_1_LOG}
+  
+  #### ===================================================
+  elif [ "$1" = "SLICE_2" ]
+	then 
+	export SLICE_2_MISSION=$(echo ${PROD_ZIP} | cut -c 1-3) ## S1A, S1B
+	export SLICE_2_PROD_TYPE=$(echo ${PROD_ZIP} | cut -c 5-16) ## IW_SLC__1SDV
+	export SLICE_2_YMD=$(echo ${PROD_ZIP} | cut -c 18-25) # fomat of the string YYYYMMDD
+	export SLICE_2_YMD_dateformat=$(date '+%Y%m%d' -d "${SLICE_2_YMD}") # FORMAT the acquisition date text in a real date 
+	export SLICE_2_DMY=$(date '+%d%b%Y' -d "${SLICE_2_YMD_dateformat}")  # put the acquisition date into a format to be ingested into the S1TBX xml chain 
+	export SLICE_2_START_HHMMSS=$(echo ${PROD_ZIP} | cut -c 27-32) # fomat of the string HHMMSS
+	export SLICE_2_END_HHMMSS=$(echo ${PROD_ZIP} | cut -c 43-48) # fomat of the string HHMMSS
+	export SLICE_2_ROOTNAME="${SLICE_2_MISSION}_${SLICE_2_DMY}_${SLICE_2_START_HHMMSS}_${SLICE_2_END_HHMMSS}"
+	#### for debugging
+	# echo "SLICE_2 image .zip = ${2}"
+	# echo "SLICE_2 image - Satellite Mission = ${SLICE_2_MISSION}" 
+	# echo "SLICE_2 product type = ${SLICE_2_PROD_TYPE}" 
+	# echo "SLICE_2 date YYYYMMDD: ${SLICE_2_YMD}" 
+	# echo "SLICE_2 Acquisition date DDMMYYYY: ${SLICE_2_DMY}"
+	# echo "SLICE_2 Start Time HHMMSS: ${SLICE_2_START_HHMMSS}"
+	# echo "SLICE_2 End Time HHMMSS: ${SLICE_2_END_HHMMSS}"
+	# echo "SLICE_2 Root name = ${SLICE_2_ROOTNAME}"
+    #### ===================================================
+    #### Creation logfile image within the PRODUCT OUTPUT folder
+	export SLICE_2_LOG="${3}/log_${SLICE_2_ROOTNAME}_processed_$(date +"%F_%H%M%S").txt"
+    #### Logging into the logfile
+    echo "=========================================" >> ${SLICE_2_LOG}
+	echo "Time : $(date +"%F_%H%M%S")" >> ${SLICE_2_LOG}
+    echo "S1 Image .zip = ${SLICE_2_ZIP}" >> ${SLICE_2_LOG}
+	echo "Satellite Mission = ${SLICE_2_MISSION}" >> ${SLICE_2_LOG}
+	echo "Product type = ${SLICE_2_PROD_TYPE}" >> ${SLICE_2_LOG}
+	echo "Date YYYYMMDD: ${SLICE_2_YMD}" >> ${SLICE_2_LOG}
+	echo "Acquisition date DDMMYYYY: ${SLICE_2_DMY}" >> ${SLICE_2_LOG}
+	echo "Start Time HHMMSS: ${SLICE_2_START_HHMMSS}" >> ${SLICE_2_LOG}
+	echo "End Time HHMMSS: ${SLICE_2_END_HHMMSS}" >> ${SLICE_2_LOG}
+	echo "Product Root name = ${SLICE_2_ROOTNAME}" >> ${SLICE_2_LOG}
+	echo "=========================================" >> ${SLICE_2_LOG}
+  #### ===================================================
+  
+  elif [ "$1" = "SLICE_3" ]
+	then
+	export SLICE_3_MISSION=$(echo ${PROD_ZIP} | cut -c 1-3) ## S1A, S1B
+	export SLICE_3_PROD_TYPE=$(echo ${PROD_ZIP} | cut -c 5-16) ## IW_SLC__1SDV
+	export SLICE_3_YMD=$(echo ${PROD_ZIP} | cut -c 18-25) # fomat of the string YYYYMMDD
+	export SLICE_3_YMD_dateformat=$(date '+%Y%m%d' -d "${SLICE_3_YMD}") # FORMAT the acquisition date text in a real date 
+	export SLICE_3_DMY=$(date '+%d%b%Y' -d "${SLICE_3_YMD_dateformat}")  # put the acquisition date into a format to be ingested into the S1TBX xml chain 
+	export SLICE_3_START_HHMMSS=$(echo ${PROD_ZIP} | cut -c 27-32) # fomat of the string HHMMSS
+	export SLICE_3_END_HHMMSS=$(echo ${PROD_ZIP} | cut -c 43-48) # fomat of the string HHMMSS
+	export SLICE_3_ROOTNAME="${SLICE_3_MISSION}_${SLICE_3_DMY}_${SLICE_3_START_HHMMSS}_${SLICE_3_END_HHMMSS}"
+	#### for debugging
+	#echo "SLICE_3 image .zip = ${2}"
+	#echo "SLICE_3 image - Satellite Mission = ${SLICE_3_MISSION}" 
+	#echo "SLICE_3 product type = ${SLICE_3_PROD_TYPE}" 
+	#echo "SLICE_3 date YYYYMMDD: ${SLICE_3_YMD}" 
+	#echo "SLICE_3 Acquisition date DDMMYYYY: ${SLICE_3_DMY}"
+	#echo "SLICE_3 Start Time HHMMSS: ${SLICE_3_START_HHMMSS}"
+	#echo "SLICE_3 End Time HHMMSS: ${SLICE_3_END_HHMMSS}"
+	#echo "SLICE_3 Root name = ${SLICE_3_ROOTNAME}"
+    #### ===================================================
+    #### Creation logfile image within the PRODUCT OUTPUT folder
+	export SLICE_3_LOG="${3}/log_${SLICE_3_ROOTNAME}_processed_$(date +"%F_%H%M%S").txt"
+    #### Logging into the logfile
+    echo "=========================================" >> ${SLICE_3_LOG}
+	echo "Time : $(date +"%F_%H%M%S")" >> ${SLICE_3_LOG}
+    echo "S1 Image .zip = ${SLICE_3_ZIP}" >> ${SLICE_3_LOG}
+	echo "Satellite Mission = ${SLICE_3_MISSION}" >> ${SLICE_3_LOG}
+	echo "Product type = ${SLICE_3_PROD_TYPE}" >> ${SLICE_3_LOG}
+	echo "Date YYYYMMDD: ${SLICE_3_YMD}" >> ${SLICE_3_LOG}
+	echo "Acquisition date DDMMYYYY: ${SLICE_3_DMY}" >> ${SLICE_3_LOG}
+	echo "Start Time HHMMSS: ${SLICE_3_START_HHMMSS}" >> ${SLICE_3_LOG}
+	echo "End Time HHMMSS: ${SLICE_3_END_HHMMSS}" >> ${SLICE_3_LOG}
+	echo "Product Root name = ${SLICE_3_ROOTNAME}" >> ${SLICE_3_LOG}
+	echo "=========================================" >> ${SLICE_3_LOG} 
+  #### ===================================================
+  else
+	echo "Please select a value for the first parameter "\$1": SLICE_1, SLICE_2, SLICE_3"
+	exit  
+  fi 
+}
+
