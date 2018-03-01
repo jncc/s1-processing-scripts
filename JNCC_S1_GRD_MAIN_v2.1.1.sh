@@ -34,7 +34,7 @@
  
 ###===============================================================
 ### HOW TO LAUNCH THE SCRIPT: name_script.sh $1 $2 $3 $4 $5 $6
-### e.g.: JNCC_S1_GRD_MAIN_v1.1 1 1 1 1 1 1 2 1 1 
+### e.g.: JNCC_S1_GRD_MAIN_v2.1.1 1 1 1 1 1 1 2 1 1 
 ### This script uses POSITIONAL parameters value offering different processing combination 
 ### 
 ### 1st parameter ($1) determines the type of product to be processed: 1 (=GRD); 2 (=SLC); N.B.: a value must chosen
