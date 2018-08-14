@@ -35,7 +35,7 @@ Used Operators: Multilooking, Terrain Correction, BandMaths
       <demName>External DEM</demName>
       <externalDEMFile>$input5</externalDEMFile>
       <externalDEMNoDataValue>-32768</externalDEMNoDataValue>
-      <externalDEMApplyEGM>false</externalDEMApplyEGM>
+      <externalDEMApplyEGM>true</externalDEMApplyEGM>
       <demResamplingMethod>$input6</demResamplingMethod>
       <imgResamplingMethod>$input7</imgResamplingMethod>
       <pixelSpacingInMeter>$input8</pixelSpacingInMeter>

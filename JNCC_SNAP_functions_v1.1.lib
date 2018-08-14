@@ -42,7 +42,7 @@ SNAP_S1GRD_RBN_POLS_CAL_PO()
   echo "==> Apply precise orbit: ${ORBIT_TYPE}" >> ${logfile} 
   echo "Input data: $INDIRPROD/${PROD_ZIP}" >> ${logfile} 
   ############ 
-  $SNAP_HOME/gpt $GRAPHSDIR/S1_GRD_BNR_POL_TNR_CAL_PO.xml -e -x\
+  $SNAP_HOME/gpt $GRAPHSDIR/S1_GRD_BNR_POL_TNR_CAL_PO.xml $SNAP_OPTS -e -x\
   -Pinput1="${INDIRPROD}/${PROD_ZIP}" -Pinput2="${POL}"\
   -Pinput3="1000" -Pinput4="0.5" -Pinput5="${ORBIT_TYPE}"\
   -Ptarget1="${OUTPRODIR}/${PROD_ROOTNAME}_${POL}_CAL.dim" >> ${logfile}
@@ -83,7 +83,7 @@ SNAP_S1GRD_SLICEASSEMBLY()
     echo "Output folder: ${TR_OUTDIR}" >> ${logfile}
     echo "start: $(date +"%F_%H%M%S")" >> ${logfile} 
     ## SNAP processing chain 
-    $SNAP_HOME/gpt $GRAPHSDIR/S1_GRD_2SlicesAssembly.xml -e -x\
+    $SNAP_HOME/gpt $GRAPHSDIR/S1_GRD_2SlicesAssembly.xml $SNAP_OPTS -e -x\
     -Pinput1="${TR_INDIR}/${SLICE_1_ZIP}" -Pinput2="${TR_INDIR}/${SLICE_2_ZIP}"\
     -Ptarget1="${TR_OUTDIR}/${ROOTNAME}_${POL}.dim" >> ${logfile}
     echo "end: $(date +"%F_%H%M%S")" >> ${logfile}
@@ -99,7 +99,7 @@ SNAP_S1GRD_SLICEASSEMBLY()
     echo "Output folder: ${TR_OUTDIR}" >> ${logfile}
     echo "start: $(date +"%F_%H%M%S")" >> ${logfile} 
     ## SNAP processing chain 
-    $SNAP_HOME/gpt $GRAPHSDIR/S1_GRD_3SlicesAssembly.xml -e -x\
+    $SNAP_HOME/gpt $GRAPHSDIR/S1_GRD_3SlicesAssembly.xml $SNAP_OPTS -e -x\
     -Pinput1="${TR_INDIR}/${SLICE_1_ZIP}" -Pinput2="${TR_INDIR}/${SLICE_2_ZIP}" -Pinput3="${TR_INDIR}/${SLICE_3_ZIP}"\
     -Ptarget1="${TR_OUTDIR}/${ROOTNAME}_${POL}.dim" >> ${logfile}
     echo "end: $(date +"%F_%H%M%S")" >> ${logfile}
@@ -142,7 +142,7 @@ SNAP_TF_EXTDEM()
 	echo "Output folder: ${TR_OUTDIR}" >> ${logfile}
 	echo "start: $(date +"%F_%H%M%S")" >> ${logfile}
 	## SNAP processing chain 
-  $SNAP_HOME/gpt $GRAPHSDIR/S1_Terrain_Flattening_APGB.xml -e -x\
+  $SNAP_HOME/gpt $GRAPHSDIR/S1_Terrain_Flattening_APGB.xml $SNAP_OPTS -e -x\
   -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
   -Pinput2="${BANDNAME}_$POL" -Pinput3="${demResamplingMethod}" -Pinput4="${EXTDEMFILE}" -Pinput5="${EXTDEMNOVAL}"\
   -Ptarget1="${TR_OUTDIR}/${ROOTNAME}_${POL}_Gamma0_${SELDEM}_FLAT.dim" >> ${logfile}
@@ -191,7 +191,7 @@ SNAP_ML_TC_OSGB1936()
   ### APGB
   if [ "${SELDEM}" = "APGB" ] 
     then
-    $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_OSGB1936.xml -e -x\
+    $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_OSGB1936.xml $SNAP_OPTS -e -x\
     -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
     -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="${BANDNAME}_$POL"\
     -Pinput10="${EXTDEMFILE}" -Pinput5="${demResamplingMethod}" -Pinput6="${imgResamplingMethod}"\
@@ -203,7 +203,7 @@ SNAP_ML_TC_OSGB1936()
   ### SRTM90
   if [ "${SELDEM}" = "SRTM90" ] 
     then
-    $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_OSGB1936.xml -e -x\
+    $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_OSGB1936.xml $SNAP_OPTS -e -x\
     -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
     -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="${BANDNAME}_$POL"\
     -Pinput5="${demResamplingMethod}" -Pinput6="${imgResamplingMethod}"\
@@ -263,7 +263,7 @@ SNAP_ML_TC_RNKELL_OSGB1936()
     ### APGB
     if [ "${SELDEM}" = "APGB" ]
       then
-      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_OSGB1936_RadNormKell.xml -e -x\
+      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_OSGB1936_RadNormKell.xml $SNAP_OPTS -e -x\
       -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
       -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="Beta0_$POL"\
       -Pinput5="${EXTDEMFILE}" -Pinput6="${demResamplingMethod}" -Pinput7="${imgResamplingMethod}"\
@@ -277,7 +277,7 @@ SNAP_ML_TC_RNKELL_OSGB1936()
     ### SRTM90
     if [ "${SELDEM}" = "SRTM90" ]
       then  
-      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_OSGB1936_RadNormKell.xml -e -x\
+      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_OSGB1936_RadNormKell.xml $SNAP_OPTS -e -x\
       -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
       -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="Beta0_$POL"\
       -Pinput5="${demResamplingMethod}" -Pinput6="${imgResamplingMethod}"\
@@ -331,7 +331,7 @@ SNAP_ML_TC_EPSG29902()
   ### APGB
   if [ "${SELDEM}" = "APGB" ] 
     then
-    $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_EPSG29902.xml -e -x\
+    $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_EPSG29902.xml $SNAP_OPTS -e -x\
     -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
     -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="${BANDNAME}_$POL"\
     -Pinput10="${EXTDEMFILE}" -Pinput5="${demResamplingMethod}" -Pinput6="${imgResamplingMethod}"\
@@ -343,7 +343,7 @@ SNAP_ML_TC_EPSG29902()
   ### SRTM90
   if [ "${SELDEM}" = "SRTM90" ] 
     then
-    $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_EPSG29902.xml -e -x\
+    $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_EPSG29902.xml $SNAP_OPTS -e -x\
     -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
     -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="${BANDNAME}_$POL"\
     -Pinput5="${demResamplingMethod}" -Pinput6="${imgResamplingMethod}"\
@@ -403,7 +403,7 @@ SNAP_ML_TC_RNKELL_EPSG29902()
     ### APGB
     if [ "${SELDEM}" = "APGB" ]
       then
-      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_EPSG29902_RadNormKell.xml -e -x\
+      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_EPSG29902_RadNormKell.xml $SNAP_OPTS -e -x\
       -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
       -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="Beta0_$POL"\
       -Pinput5="${EXTDEMFILE}" -Pinput6="${demResamplingMethod}" -Pinput7="${imgResamplingMethod}"\
@@ -417,7 +417,7 @@ SNAP_ML_TC_RNKELL_EPSG29902()
     ### SRTM90
     if [ "${SELDEM}" = "SRTM90" ]
       then  
-      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_EPSG29902_RadNormKell.xml -e -x\
+      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_EPSG29902_RadNormKell.xml $SNAP_OPTS -e -x\
       -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
       -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="Beta0_$POL"\
       -Pinput5="${demResamplingMethod}" -Pinput6="${imgResamplingMethod}"\
@@ -475,7 +475,7 @@ SNAP_ML_TC_UTMWGS84()
   ### APGB
   if [ "${SELDEM}" = "APGB" ] 
 		then
-		$SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_UTMWGS84.xml -e -x\
+		$SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_UTMWGS84.xml $SNAP_OPTS -e -x\
 		-Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
 		-Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="${BANDNAME}_$POL"\
 		-Pinput5="${EXTDEMFILE}" -Pinput6="${demResamplingMethod}" -Pinput7="${imgResamplingMethod}"\
@@ -488,7 +488,7 @@ SNAP_ML_TC_UTMWGS84()
 	### SRTM90
 	if [ "${SELDEM}" = "SRTM90" ] 
 		then
-		$SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_UTMWGS84.xml -e -x\
+		$SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_UTMWGS84.xml $SNAP_OPTS -e -x\
 		-Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
 		-Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="${BANDNAME}_$POL"\
 		-Pinput5="${demResamplingMethod}" -Pinput6="${imgResamplingMethod}"\
@@ -550,7 +550,7 @@ SNAP_ML_TC_RNKELL_UTMWGS84()
     ### APGB
 	  if [ "${SELDEM}" = "APGB" ] 
       then
-      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_UTMWGS84_RadNormKell.xml -e -x\
+      $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_APGB_UTMWGS84_RadNormKell.xml $SNAP_OPTS -e -x\
 		  -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
 		  -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="Beta0_$POL"\
 		  -Pinput5="${EXTDEMFILE}" -Pinput6="${demResamplingMethod}" -Pinput7="${imgResamplingMethod}"\
@@ -565,7 +565,7 @@ SNAP_ML_TC_RNKELL_UTMWGS84()
 	  ### SRTM90
 	  if [ "${SELDEM}" = "SRTM90" ]
       then	
-		  $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_UTMWGS84_RadNormKell.xml -e -x\
+		  $SNAP_HOME/gpt $GRAPHSDIR/S1_ML_TC_SRTM90_UTMWGS84_RadNormKell.xml $SNAP_OPTS -e -x\
 		  -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${INSUFFIX}.dim"\
 		  -Pinput2="${RANGE_LOOK}" -Pinput3="${AZIMUTH_LOOK}" -Pinput4="Beta0_$POL"\
 		  -Pinput5="${demResamplingMethod}" -Pinput6="${imgResamplingMethod}"\
@@ -617,7 +617,7 @@ SNAP_SpeckleFiltering()
     echo "Output folder: ${TR_OUTDIR}" >> ${logfile}
     echo "start: $(date +"%F_%H%M%S")" >> ${logfile}
     ## SNAP processing chain 
-    $SNAP_HOME/gpt $GRAPHSDIR/S1_Speckle_Filtering.xml -e -x\
+    $SNAP_HOME/gpt $GRAPHSDIR/S1_Speckle_Filtering.xml $SNAP_OPTS -e -x\
     -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${BANDNAME}_${SELDEM}_${CRS}_${INSUFFIX}.tif"\
     -Pinput2="${BANDNAME}_$POL" -Pinput3="${Specklefilter}" -Pinput4="GeoTIFF-BigTIFF"\
     -Ptarget1="${TR_OUTDIR}/${ROOTNAME}_${POL}_${BANDNAME}_${SELDEM}_${CRS}_${INSUFFIX}_${OUTSUFFIX}.tif" >> ${logfile}
@@ -663,7 +663,7 @@ SNAP_ConvLinToDb()
     echo "Output folder: ${TR_OUTDIR}" >> ${logfile}
     echo "start: $(date +"%F_%H%M%S")" >> ${logfile}
     ## SNAP processing chain 
-    $SNAP_HOME/gpt $GRAPHSDIR/S1_BMLinTodB.xml -e -x\
+    $SNAP_HOME/gpt $GRAPHSDIR/S1_BMLinTodB.xml $SNAP_OPTS -e -x\
     -Pinput1="${TR_INDIR}/${ROOTNAME}_${POL}_${BANDNAME}_${SELDEM}_${CRS}_${INSUFFIX}.tif"\
     -Pinput2="${BANDNAME}_${POL}_db" -Pinput3="10*log10(${BANDNAME}_$POL)" -Pinput4="Intesity" -Pinput5="NaN" -Pinput6="GeoTIFF-BigTIFF"\
     -Ptarget1="${TR_OUTDIR}/${ROOTNAME}_${POL}_${BANDNAME}_${SELDEM}_${CRS}_${INSUFFIX}_${OUTSUFFIX}.tif" >> ${logfile}

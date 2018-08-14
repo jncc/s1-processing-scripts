@@ -7,10 +7,11 @@
 ### ========================================================
 ### LOG history version
 ### 9-11-2017: version 1.0
-### 29-11-2017: version 2.0 - modified /Processing_Polarisation_VV_v1.sh with /Processing_Polarisation_VV_v2.sh 
-###                         - modified /Processing_Polarisation_VH_v1.sh with /Processing_Polarisation_VH_v2.sh
-### 08-12-2017: version 2.1 - modified /Processing_Polarisation_VV_v2.sh with /Processing_Polarisation_VV_v2.1.sh 
-###                         - modified /Processing_Polarisation_VH_v2.sh with /Processing_Polarisation_VH_v2.1.sh
+### 29-11-2017: version 2.0   - modified /Processing_Polarisation_VV_v1.sh with /Processing_Polarisation_VV_v2.sh 
+###                           - modified /Processing_Polarisation_VH_v1.sh with /Processing_Polarisation_VH_v2.sh
+### 08-12-2017: version 2.1	  - modified /Processing_Polarisation_VV_v2.sh with /Processing_Polarisation_VV_v2.1.sh 
+###                           - modified /Processing_Polarisation_VH_v2.sh with /Processing_Polarisation_VH_v2.1.sh
+### 01-03-2018: version 2.1.1 - added SNAP_OPTS to configfile and SNAP functions
 ### ========================================================
 ## Generated OUTPUTS: 
 ## 1) Geocoded Absolute Gamma0 and Sigma0 VV and VH
@@ -33,7 +34,7 @@
  
 ###===============================================================
 ### HOW TO LAUNCH THE SCRIPT: name_script.sh $1 $2 $3 $4 $5 $6
-### e.g.: JNCC_S1_GRD_MAIN_v1.0 1 1 1 1 1 1 2 1 1 
+### e.g.: JNCC_S1_GRD_MAIN_v2.1.1 1 1 1 1 1 1 2 1 1 
 ### This script uses POSITIONAL parameters value offering different processing combination 
 ### 
 ### 1st parameter ($1) determines the type of product to be processed: 1 (=GRD); 2 (=SLC); N.B.: a value must chosen
@@ -50,9 +51,9 @@
 
 #!/bin/bash 
 ### Configuration file and libraries
-. ./JNCC_S1_GRD_configfile_v.1.0.sh  ### configuration file with directories and procssing paramenters 
+. ./JNCC_S1_GRD_configfile_v.1.1.sh  ### configuration file with directories and procssing paramenters 
 . ./JNCC_S1_VARS_OUTPRDIR_v1.0.lib ### Library to generate variables from name of the S1.zip 
-. ./JNCC_SNAP_functions_v1.0.lib ### Library containing processing modules with SNAP
+. ./JNCC_SNAP_functions_v1.1.lib ### Library containing processing modules with SNAP
 
 ##############################################################
 #### Processing start 
