@@ -19,7 +19,6 @@
       <externalDEMFile>$input4</externalDEMFile>
       <externalDEMNoDataValue>$input5</externalDEMNoDataValue>
       <outputSimulatedImage>false</outputSimulatedImage>
-      <reGridMethod>false</reGridMethod>
     </parameters>
   </node>
   <node id="Write">

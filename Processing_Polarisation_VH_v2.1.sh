@@ -34,15 +34,6 @@ if [ "${CRS}" = "OSGB1936" ]; then
 	### Coversion from linear to dB
 	SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Sigma0" "RTC_${Spk}" "${SLICE_LOG}" 
 	SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "RTC_${Spk}" "${SLICE_LOG}" 
-	###=================================####
-    ### Terrain Flattening Radiometrically Normalisation (Small) Gamma0 Multilooked (optional) and Terrain Corrected (output as Geotiff) only for APGB DEM		    
-    if [ "${SELDEM}" = "APGB" ]; then
-    	SNAP_ML_TC_OSGB1936 "${SLICE_VH_OUTDIR}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0_APGB_FLAT" "Gamma0" "FTC" "${SLICE_LOG}"
-		### Speckle filtering
-		SNAP_SpeckleFiltering "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "FTC" "${SLICE_LOG}"
-		### Coversion from linear to dB
-		SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "FTC_${Spk}" "${SLICE_LOG}" 
-	fi
 	####=================================####
 elif [ "${CRS}" = "EPSG29902" ]; then 
     echo "CRS=EPSG29902"
@@ -62,14 +53,6 @@ elif [ "${CRS}" = "EPSG29902" ]; then
 	SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Sigma0" "RTC_${Spk}" "${SLICE_LOG}" 
 	SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "RTC_${Spk}" "${SLICE_LOG}" 
 	###=================================####
-    ### Terrain Flattening Radiometrically Normalisation (Small) Gamma0 Multilooked (optional) and Terrain Corrected (output as Geotiff) only for APGB DEM			    
-    if [ "${SELDEM}" = "APGB" ]; then
-    	SNAP_ML_TC_EPSG29902 "${SLICE_VH_OUTDIR}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0_APGB_FLAT" "Gamma0" "FTC" "${SLICE_LOG}"
-		### Speckle filtering
-		SNAP_SpeckleFiltering "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "FTC" "${SLICE_LOG}"
-		### Coversion from linear to dB
-		SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "FTC_${Spk}" "${SLICE_LOG}"
-	fi
 elif [ "${CRS}" = "UTMWGS84" ]; then 
     echo "UTM WGS84"
 	####=================================####
@@ -87,14 +70,6 @@ elif [ "${CRS}" = "UTMWGS84" ]; then
 	SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Sigma0" "RTC_${Spk}" "${SLICE_LOG}" 
 	SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "RTC_${Spk}" "${SLICE_LOG}" 
 	####=================================####
-	### Terrain Flattening Radiometrically Normalisation (Small) Gamma0 Multilooked (optional) and Terrain Corrected (output as Geotiff) only for APGB DEM		    
-    if [ "${SELDEM}" = "APGB" ]; then	
-    	SNAP_ML_TC_UTMWGS84 "${SLICE_VH_OUTDIR}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0_APGB_FLAT" "Gamma0" "FTC" "${SLICE_LOG}"
-		### Speckle filtering
-		SNAP_SpeckleFiltering "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "FTC" "${SLICE_LOG}"
-		### Coversion from linear to dB
-		SNAP_ConvLinToDb "${SLICE_VH_OUTDIR_GEO}" "${SLICE_VH_OUTDIR_GEO}" "${SLICE_ROOTNAME}" "VH" "Gamma0" "FTC_${Spk}" "${SLICE_LOG}" 
-	fi
 else 
     echo "Other CRS"
 fi
